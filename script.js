@@ -43,8 +43,14 @@ function generateSteps() {
   console.debug('steps generated', steps);
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  console.debug('DOMContentLoaded');
+function initialize() {
+  console.debug('initialize');
   generateSteps();
   document.getElementById('generate').addEventListener('click', generateSteps);
-});
+}
+
+if (document.readyState !== 'loading') {
+  initialize();
+} else {
+  document.addEventListener("DOMContentLoaded", initialize);
+}
