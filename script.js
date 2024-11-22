@@ -20,8 +20,8 @@ function randomSteps(number) {
     if (leadStep !== 'stay') leadFoot = switchFoot(leadFoot);
     if (followStep !== 'stay') followFoot = switchFoot(followFoot);
     steps.push({
-      leader: `<code>${leadFoot}:</code> <span class="step ${leadStep}">${stepOptions[leadStep]}</span>`,
-      follower: `<code>${followFoot}:</code> <span class="step ${followStep}">${stepOptions[followStep]}</span>`,
+      leader: {foot: leadFoot, step: leadStep},
+      follower: {foot: followFoot, step: followStep},
     });
   }
   return steps;
@@ -35,12 +35,16 @@ function generateSteps() {
   let steps = randomSteps(number);
   steps.forEach((step, i) => {
     let row = document.createElement('tr');
-    row.innerHTML = `<th>${i + 1}</th><td>${step.leader}</td><td>${step.follower}</td>`;
+    row.innerHTML = `<th>${i + 1}</th>`;
+    row.innerHTML += `<td><code>${step.leader.foot}:</code> <span class="step ${step.leader.step}">${stepOptions[step.leader.step]}</span></td>`
+    row.innerHTML += `<td><code>${step.follower.foot}:</code> <span class="step ${step.follower.step}">${stepOptions[step.follower.step]}</span></td>`;
     table.appendChild(row);
   })
+  console.debug('steps generated', steps);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  console.debug('DOMContentLoaded');
   generateSteps();
   document.getElementById('generate').addEventListener('click', generateSteps);
 });
