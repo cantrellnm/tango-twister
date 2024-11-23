@@ -1,6 +1,6 @@
 const stepOptions = {
   stay: 'Stay',
-  transfer: 'Weight Transfer',
+  transfer: 'Change Weight',
   open: 'Open Step',
   front: 'Front Cross',
   back: 'Back Cross',
@@ -36,8 +36,8 @@ function generateSteps() {
   steps.forEach((step, i) => {
     let row = document.createElement('tr');
     row.innerHTML = `<th>${i + 1}</th>`;
-    row.innerHTML += `<td><code>${step.leader.foot}:</code> <span class="step ${step.leader.step}">${stepOptions[step.leader.step]}</span></td>`
-    row.innerHTML += `<td><code>${step.follower.foot}:</code> <span class="step ${step.follower.step}">${stepOptions[step.follower.step]}</span></td>`;
+    row.innerHTML += `<td><code>${step.leader.foot}</code> <span class="step ${step.leader.step}">${stepOptions[step.leader.step]}</span></td>`
+    row.innerHTML += `<td><code>${step.follower.foot}</code> <span class="step ${step.follower.step}">${stepOptions[step.follower.step]}</span></td>`;
     table.appendChild(row);
   })
   console.debug('steps generated', steps);
